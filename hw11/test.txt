@@ -1,0 +1,80 @@
+test for Othello game codes
+Which functions you tested for Part 1
+    A summary of valid inputs (inputs for which you’d expect a ‘good’ result) and expected return values
+    A summary of invalid inputs (inputs for which you’d expect a ‘bad’ result) and expected return values
+    Whether you’re confident you’ve verified every possible eventuality—not quite, but will modify while implementing part2
+    Whether your testing revealed any bugs that you then went back and fixed.
+
+to be tested:
+Class:
+1.GameController
+1.1  test_constructor()
+    test whether:
+    no one wins at the beginning
+    gc object has the right size
+
+
+2. Board
+2.1  test_constructor()
+    test whether:
+    the board object is of desired size, with a desired game_controller object gc; 
+    the disks object has the desired constants;
+    and a matrix(list of list to represent the disks) with the first 4 disks in the middle, i.e., corresponding row and volume of the matrix:
+        Board of size 0 returns []
+        Board of size 2x2 returns [[black, white], [white, black]
+        Board of size 4x4 returns : [[None, None, None, None], [None, white, black, None], [None, black, white, None], [None, None, None, None]]
+
+
+2.2  test_create_disk(mouseX, mouseY)
+    pass in the player’s mouseX and mouseY,  test whether the cell of this mouseX and mouseY is added a disk 
+
+3. Disk
+    represent a piece of chess, black or white
+3.1  test_constructor()
+    test whether successfully create a disk according to a given position
+3.2 __repr__()
+    test whether print(disk) render the desired expressions
+
+4. Disks
+4.1  test_constructor()
+    test whether:
+    the disks object has the desired constants;
+    the empty matrix is of desired length of rows and length of columns;
+    the attributes are of correct initial value
+
+4.2 test_create(playerX, playerY)
+    test whether successfully create a disk according to the position it get, i.e., add it into the matrix
+
+4.3 test helper methods 
+
+
+5. AI
+nothing yet
+
+
+6. Player
+6.1 test_constructor()
+    test whether the player object has a desired board
+
+6.2 test_control()
+    I need to test human_player’s move method and ai_player’s move method separately, if I change the control method into separate ones.
+
+7. GameManager
+7.1 test_constructor()
+    test whether the player object has a desired attributes
+
+7.2 test_human_make_move(self, x, y):
+    test wheter the human_player takes an action, 
+    and, 
+    whether the turns has been switched
+
+7.3 test_ai_make_move(self):
+    test wheter the ai_player takes an action, 
+    and, 
+    whether the turns has been switched
+
+
+
+more to be tested:
+Since rules will become much more complicated in Part2, eventually I will need to add test for whether the disks are flipping in a right way, whether the disk can only be added into a legal  position, whether the counting attributes all works well according to each step taken. 
+

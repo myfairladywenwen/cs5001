@@ -1,0 +1,7 @@
+[
+  "a_class_test.py::test_constructor",
+  "a_class_test.py::test_return_value",
+  "some_functions_test.py::test_multiply_numbers",
+  "some_functions_test.py::test_flatten_list_of_string",
+  "something_test.py::test_something"
+]

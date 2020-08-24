@@ -1,0 +1,192 @@
+Design for the Othello Game
+
+the flow:
+1.
+When the user tries to make an illegal move, nothing happened
+2.
+When the user makes a legal move, display a black disk on the position, change color of related disks, and update all the counting attributes
+3.
+When it’s the computer’s turn, decide for the computer where to add a new disk, and also, carry out the display of the newly added disk, change color of related disks, and update all the counting attributes
+4.When the game is over (there are no more legal moves), take necessary actions according to the counting result
+
+set up the status, numbers of disks, and the chess board
+while the board is not full and there is still cell of legal move:
+    if it is the human_player’s turn:
+        human_player make a move:
+            if it is a legal move:
+                create a related disk
+                flip
+                counting the number of total disks, 
+                the umber of white and black disk,
+                total step, etc.
+            else:
+                if there is still legal positon for the player:
+                    try to make another human_player move, 
+                    the cycle ends only until human_player
+                    makes a legal move
+                else:
+                    swith the turn to ai_player
+    after the legal move, it will be the ai_player’s turn
+ 
+    else: # now it’s the ai_player’s turn
+        ai_player make a move:
+            if it is a legal move:
+                create a related disk
+                flip
+                counting the number of total disks, 
+                the number of white and black disk,
+                total step, etc.
+            else:
+                try to make another ai_player move, 
+                the cycle ends only until ai_player
+                makes a legal move
+    after the legal move, it will be the human_player’s turn
+    each time a player takes a move, the data that recording the status of the game ( numbers of disks, steps, etc.) should be updated;
+    and also, the display of the chess board should update according to the actual number of disks at present
+when there is no legal move, show the result to the screen.
+Also, 
+if ai wins:
+    note ai is the winner, note the score down to a file
+else:
+    ask for the player’s name and note the score down to a file
+
+currently, I only use list of list data structure for part1.  I am thinking of 
+using dictionary and set for part2.
+ 
+0. starter.pyde:
+define constants that will be used
+initialize a game_controller
+initialize a board
+initialize a human_player
+initialize an ai_player
+initialize a game_manager
+
+
+0.1  setup():
+#set size and color mode of chess board
+
+0.2 draw():
+    bg color
+        board.display()
+    if it is the ai’s turn:
+        ai_make_move()
+    game_controller.update()
+
+0.3 mousePressed():
+if it is the human_player’ s turn:
+    player.control(mouseX, mouseY)
+# to get the mouse position, pass it into our objects, can be used later
+
+0.4 ai_make_move():
+    just call gm’s ai_make_move method
+
+
+Class:
+1.GameController
+    maintain the status of the game
+1.1  __init__()
+    initialize the game statue: anyone wins?
+
+1.2  update()
+    according to the game status, carry out actions
+
+2. Board
+import Disks
+    draw the board and handles interaction between disk and board
+
+2.1  __init__()
+    initialize the board of desired size, with a game_controller, and a matrix(list of list to represent the disks);
+    create the first 4 disks in the middle
+
+2.2  update
+    check whether all spaces are filled, or no possible moves for black(i.e. anyone won)
+
+2.3  display
+    self.update()
+    disks.display()
+    draw strokes of lines
+
+2.4 create_disk(playerX, playerY)
+    pass in the player’s mouseX and mouseY; call Disks’ create method to pass the position information to Disks
+    for AI, I need to calculate the x and y from its row and colume value
+
+3. Disk
+    represent a piece of chess, black or white
+3.1  __init__
+    create a disk according to its position
+3.2 display()
+    draw the disk
+3.3 __repr__()  #might be useful while debugging or testing
+        ‘black’ for color (0,0,0)
+    ‘white’ for color (1,1,1)
+    ‘0’ if no disk
+
+4. Disks
+    matrix of disks
+    update current status (of each cell), which are black, which are white, which are empty
+
+4.1  __init__()
+    initialize an empty matrix,
+    set up some attributes for further use: total count, total step, black count, white count, etc. 
+
+4.2 display()
+    loop within the matrix, call each Disk’s display method
+
+4.3 create(playerX, playerY)
+    create a disk according to the position it get, i.e., add it into the matrix
+
+4.4 some helper methods to enhance functionality, 
+eg: check whether the cell is empty, check whether the board is full, etc.
+
+4.5 I might wrap some method into a new “rule” method later, to enhance the functionality of my codes.  The rule method will include checking whether the board is full, if the cell is empty, etc.
+
+5. AI
+Currently I did not use an AI Class. 
+I just initialize two objects of the Player Class.
+Not quite sure whether I will have to use specific AI and HumanPlayer Classes to represent the corresponding objects.
+
+6. Player
+6.1 __init__(board)
+
+6.2 control()
+    self.board.create_disk(mouseX, mouseY)
+# I might change this part to separate methods to distinguish between human action and ai action
+
+7. GameManager
+    control swith of turns and let human/ai player take action
+
+7.1  __init__(self, human_player, ai_player):
+here I need the GameManager object to have two attributes:
+one is the human player, the other is the AI
+        self.human_player = human_player
+        self.ai_player = ai_player
+and also, the GameManager should have an attribute to control the turn
+    self.human_turn = True
+
+7.2 human_make_move(self, x, y):
+to let the human player to take action, 
+and, 
+to control the turns
+        successful_move = self.human_player.human_move(x, y)
+        if successful_move:
+              self.human_turn = False
+
+7.3 ai_make_move(self):
+to let the AI player to take action, 
+and,
+to control the turns
+        successful_move = self.ai_player.ai_move()
+        if successful_move:
+              self.human_turn = True
+
+
+
+Things not yet decided:
+1.
+I might need to construct a GameCharacter class, or not to construct the GameCharacter but to declare two objects of Player, to distinguish between AI and player;
+2.
+the rules will change in part 2.  
+For part 1, to take a legal step, we simpy check whether the cell is empty, whether the board is full.  But in Part2, we need to consider the adjacent cells.
+And also, the disks will be flipped, which results in the change of black_count, white_count, and the color of the cell.
+I might need some new attributes. 
+

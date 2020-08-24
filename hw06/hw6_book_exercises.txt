@@ -1,0 +1,37 @@
+hw6_book_exercises.txt
+7.7 Exercises 1 through 10 from the textbook.
+
+1.
+Illegal.  Since the two functions have the same name and same number of parameters, when proc(5) is called in main, we don’t know which function to execute.
+
+2.
+Legal.
+
+3.
+Legal.
+
+4.
+Legal.
+
+5.
+Illegal.  The function proc(x, y) requires two parameters, but in main when called, there is only one parameter.
+
+6.
+Illegal.  The function proc(x) requires one parameter but in main when called, there are two parameters.
+
+7.
+Legal.
+
+8.
+10
+Since calculation is happened on variable x within the proc() function and never returned.  So num remained the initial value of 10.
+
+9.
+Legal.
+X in main() is a variable bearing the value of 10, and it is passed as a parameter/argument into proc(x).  And then, in proc(x), x works as the local variable and the result of calculation is returned, and then printed.
+
+10.
+Legal.
+y in main is just the variable name, and we can choose any legal name for this variable, be it x or y or z, etc.  x in proc(x) is the parameter/argument needed to execute this function.  When main() is called, y has the value of 10 and is passed as the parameter into function proc(y), which means proc() function is called and within proc(), we execute the calculation with local variable bearing value of 10, and then returned the result.
+
+

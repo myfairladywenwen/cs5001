@@ -1,0 +1,6 @@
+{
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/Users/wenwen/anaconda3/bin/python",
+    "python.linting.pylintEnabled": false
+}

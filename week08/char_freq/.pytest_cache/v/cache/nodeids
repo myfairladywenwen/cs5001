@@ -1,0 +1,6 @@
+[
+  "character_freqs_test.py::test_constructor",
+  "character_freqs_test.py::test_count_line",
+  "character_freqs_test.py::test_sorted_counts_property",
+  "character_freqs_test.py::test_char_freqs"
+]

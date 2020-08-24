@@ -1,0 +1,32 @@
+from disks import Disks
+
+
+class Board:
+    def __init__(self, WIDTH, HEIGHT, CELL_WIDTH, game_controller):
+        self.WIDTH = WIDTH
+        self.HEIGHT = HEIGHT
+        self.CELL_WIDTH = CELL_WIDTH
+        self.gc = game_controller
+        self.disks = Disks(WIDTH, HEIGHT, CELL_WIDTH)
+
+    def create_disk(self, playerX, playerY, playerColor):
+        self.disks.create_disk(playerX, playerY, playerColor)
+
+    def update(self):
+        if self.disks.is_full:
+            self.gc.game_over = True
+            if self.disks.black_count > self.disks.white_count:
+                self.gc.black_wins = True
+            elif self.disks.black_count < self.disks.white_count:
+                self.gc.white_wins = True
+
+    def display(self):
+        self.update()
+        self.disks.display()
+
+        stroke(0.0, 0.0, 10)
+        strokeWeight(5)
+        for i in range(self.WIDTH//self.CELL_WIDTH + 1):
+            line(0, self.CELL_WIDTH * i, self.WIDTH, self.CELL_WIDTH * i)
+        for i in range(self.HEIGHT//self.CELL_WIDTH + 1):
+            line(self.CELL_WIDTH * i, 0, self.CELL_WIDTH * i, self.HEIGHT)

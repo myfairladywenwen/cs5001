@@ -1,0 +1,5 @@
+print("student's name: Wen Xie")
+print("student's birthday: Sep 3")
+print("student's hobbies: traveling, swimming, and drawing")
+print("student's favorate book: 'Le Petit Prince'")
+print("student's favorate movie: 'On Golden Pond'")
